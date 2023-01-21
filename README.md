@@ -1,5 +1,7 @@
 # Simple chatbot example using MATLAB
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/simple_chatbot) 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=toshiakit/simple_chatbot)
+
+_Created with R2022b. Compatible with R2021b and later releases_
 
 It seems everyone is talking about ChatGPT these days thanks to its impressive capabilities to mimic human speech. It is obviously a very sophisticated AI, but it is based on the language model that predicts the next words based on the preceding words.
 N-gram language models are very simple and you can code it very easily in MATLAB with Text Analytics Toolbox. Here is an example of a bot that generates random Shakespeare-like sentences. (this is based on [my old blog post](https://blogs.mathworks.com/loren/2015/09/09/text-mining-shakespeare-with-matlab/)).
