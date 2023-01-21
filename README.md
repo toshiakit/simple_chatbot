@@ -118,3 +118,5 @@ We can turn this into a function textGen as well.
 ```
 outtext = textGen(Mdl2,Mdl3,firstWord='romeo')
 ```
+
+_Copyright 2023 The MathWorks, Inc._
