@@ -21,7 +21,10 @@ We also don't want empty rows and the prologue.
 ```
 romeo(romeo == '') = [];
 romeo(1:5) = [];
+romeo(1:5)
 ```
+![First 5 lines(1)](https://github.com/toshiakit/simple_chatbot/blob/main/romeo1.png)
+
 Each line start with the name of the character, followed by . and return character. We can use this pattern to split the names from the actual lines.
 ```
 pat = "\." + newline;
@@ -35,7 +38,9 @@ dialog(is2,:) = vertcat(cstr{is2});
 dialog(~is2,2) = vertcat(cstr{~is2});
 dialog = replace(dialog,newline, " ");
 dialog = eraseBetween(dialog,'[',']','Boundaries','inclusive');
+dialog(1:5,:)
 ```
+![First 5 lines(2)](https://github.com/toshiakit/simple_chatbot/blob/main/romeo2.png)
 ## N-grams
 An n-gram is a sequence of words that appear together in a sentence. Commonly word tokens are used, and they are unigrams. You can also use a pair of words, and that's a bigram. Trigrams use three words, etc.
 Therefore, the next step is to tokenize the lines, which are in the second column of dialog.
@@ -47,7 +52,9 @@ doc(doclength(doc) < 3) = [];
 We also need to add sentence markers <s> and </s> to indicate the start and the end of sentences.
 ```
 doc = docfun(@(x) ['<s>' x '</s>'], doc);
+doc(1:5)
 ```
+![First 5 lines(3)](https://github.com/toshiakit/simple_chatbot/blob/main/romeo3.png)
 ## Language models
 Language models are used to predict a sequence of words in a sentence based on chained conditional probabilities. These probabilities are estimated by mining a collection of text known as a corpus and 'Romeo and Juliet' is our corpus. Language models are made up of such word sequence probabilities.
 Let's start by generating a bag of N-grams, which contains both the list of words and their frequencies.
@@ -82,7 +89,10 @@ T = entries(Mdl2);
 myKeys = split(T.Key);
 thou_entries = T(myKeys(:,1) == 'thou',:);
 thou_entries = sortrows(thou_entries,"Value","descend");
+thou_entries(1:5,:)
 ```
+![Thou Art Table](https://github.com/toshiakit/simple_chatbot/blob/main/thou_art.png)
+
 Let's also create a trigram language model Mdl3
 ```
 Vocab3 = bag3.Ngrams;
@@ -99,7 +109,9 @@ T = entries(Mdl3);
 myKeys = split(T.Key);
 thou_shalt_entries = T(join(myKeys(:,1:2)) == "thou shalt",:);
 thou_shalt_entries = sortrows(thou_shalt_entries,"Value","descend");
+thou_shalt_entries(1:5,:)
 ```
+![Thou Shalt Table](https://github.com/toshiakit/simple_chatbot/blob/main/thou_art_romeo.png)
 ## Predict next word
 We can then use nextWord function to generate text.
 ```
@@ -113,10 +125,12 @@ while outtext(end) ~= "</s>"
 end
 strtrim(replace(join(outtext),{'<s>','</s>'},''))
 ```
+![Next word](https://github.com/toshiakit/simple_chatbot/blob/main/romeo4.png)
 ## Generate text
 We can turn this into a function textGen as well.
 ```
 outtext = textGen(Mdl2,Mdl3,firstWord='romeo')
 ```
+![Text Gen](https://github.com/toshiakit/simple_chatbot/blob/main/romeo5.png)
 
 _Copyright 2023 The MathWorks, Inc._
